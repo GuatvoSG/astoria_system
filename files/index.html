@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astoria | Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-page">
+
+    <!-- Painel visual (foto de fundo) -->
+    <aside class="login-visual" aria-hidden="true"></aside>
+
+    <!-- Painel do formulário -->
+    <main class="login-panel">
+      <div class="login-box">
+
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 26C6 18 12 12 20 12C26 12 30 15 33 19" stroke="#EE2E2A" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="20" cy="24" r="9" stroke="#EE2E2A" stroke-width="4"/>
+          </svg>
+          <span class="brand-name">Astoria</span>
+        </div>
+
+        <h1 class="login-title">Faça Seu Login</h1>
+
+        <div class="role-toggle" role="group" aria-label="Selecionar perfil de acesso">
+          <button type="button" class="role-btn active" data-role="vendedor" aria-pressed="true">Vendedor</button>
+          <button type="button" class="role-btn" data-role="faturista" aria-pressed="false">Faturista</button>
+        </div>
+
+        <form class="login-form" action="#" method="post">
+          <input type="hidden" name="perfil" id="perfil" value="vendedor">
+
+          <div class="input-group">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12C14.4853 12 16.5 9.98528 16.5 7.5C16.5 5.01472 14.4853 3 12 3C9.51472 3 7.5 5.01472 7.5 7.5C7.5 9.98528 9.51472 12 12 12Z" stroke="#C7C8D1" stroke-width="1.5"/>
+              <path d="M4 20.5C4 16.634 7.582 13.5 12 13.5C16.418 13.5 20 16.634 20 20.5" stroke="#C7C8D1" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="text" name="usuario" placeholder="Usuário" autocomplete="username" required>
+          </div>
+
+          <div class="input-group">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="10" width="16" height="10" rx="2" stroke="#C7C8D1" stroke-width="1.5"/>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#C7C8D1" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="password" name="senha" placeholder="Senha" autocomplete="current-password" required>
+          </div>
+
+          <a href="#" class="forgot-link">Esqueci a Senha</a>
+
+          <button type="submit" class="btn-login">Login</button>
+        </form>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Seleção de perfil (Vendedor / Faturista) — mutuamente exclusiva
+    const roleButtons = document.querySelectorAll('.role-btn');
+    const perfilInput = document.getElementById('perfil');
+
+    roleButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        roleButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        perfilInput.value = btn.dataset.role;
+      });
+    });
+
+    // Envio do formulário (placeholder de integração)
+    document.querySelector('.login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const perfil = perfilInput.value;
+      window.location.href = perfil === 'faturista' ? '../files/faturista/index.html' : '../files/vendedor/index.html';
+    });
+  </script>
+</body>
+</html>
